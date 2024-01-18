@@ -19,6 +19,5 @@ namespace CharacterCreator.Data.Entities
         public string BirthLocation { get; set; } = string.Empty;
         public List<FeatureEntity> Features  = new List<FeatureEntity>();
         public TeamEntity Team { get; set; }
-
     }
 }
