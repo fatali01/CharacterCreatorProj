@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
     <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
     <ProjectReference Include="..\CharacterCreator.Data\CharacterCreator.Data.csproj" />
   </ItemGroup>
 

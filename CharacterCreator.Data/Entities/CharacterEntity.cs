@@ -18,6 +18,7 @@ namespace CharacterCreator.Data.Entities
         public string CharacterDescription { get; set; } = string.Empty;
         public string BirthLocation { get; set; } = string.Empty;
         public List<FeatureEntity> Features  = new List<FeatureEntity>();
-        public TeamEntity Team { get; set; }
+        [ForeignKey(nameof(TeamId))]
+        public int TeamId { get; set; }
     }
 }
