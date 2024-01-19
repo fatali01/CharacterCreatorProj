@@ -1,6 +1,9 @@
 using CharacterCreator.Services.Services.TeamServices;
 using CharacterCreator.Services.Services.FeatureServices;
 using CharacterCreator.Services.Services.CharacterServices;
+using Microsoft.Extensions.DependencyInjection;
+using CharacterCreator.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +19,11 @@ builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 
-var app = builder.Build();
 
+// add connection string and dbcontext setup// add connection string and dbcontext setup
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
