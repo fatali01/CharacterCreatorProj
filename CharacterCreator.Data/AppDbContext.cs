@@ -101,7 +101,7 @@ namespace CharacterCreator.Data
                 },
                 new FeatureEntity()
                 {
-                    FeatureId = 1,
+                    FeatureId = 2,
                     EyeColor = "Red",
                     HairStyle = "Spiked",
                     HairColor = "Red",
@@ -114,7 +114,7 @@ namespace CharacterCreator.Data
                 },
                 new FeatureEntity()
                 {
-                    FeatureId = 1,
+                    FeatureId = 3,
                     EyeColor = "Pink",
                     HairStyle = "Bald",
                     HairColor = "Not applicable",
@@ -127,7 +127,7 @@ namespace CharacterCreator.Data
                 },
                 new FeatureEntity()
                 {
-                    FeatureId = 1,
+                    FeatureId = 4,
                     EyeColor = "Brown",
                     HairStyle = "Short",
                     HairColor = "Brown",
@@ -140,7 +140,7 @@ namespace CharacterCreator.Data
                 },
                 new FeatureEntity()
                 {
-                    FeatureId = 1,
+                    FeatureId = 5,
                     EyeColor = "Blue",
                     HairStyle = "Long Hair",
                     HairColor = "Blue",
@@ -153,7 +153,7 @@ namespace CharacterCreator.Data
                 },
                 new FeatureEntity()
                 {
-                    FeatureId = 1,
+                    FeatureId = 6,
                     EyeColor = "Yellow",
                     HairStyle = "Mullet",
                     HairColor = "Yellow",
