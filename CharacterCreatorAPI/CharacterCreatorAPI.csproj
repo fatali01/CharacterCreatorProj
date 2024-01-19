@@ -23,8 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
     <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+=======
+    <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
+>>>>>>> 0462d8dabe9a0905cbf6c91354cb91db274b5645
     <ProjectReference Include="..\CharacterCreator.Data\CharacterCreator.Data.csproj" />
   </ItemGroup>
 
