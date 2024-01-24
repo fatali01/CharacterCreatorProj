@@ -12,6 +12,11 @@ namespace CharacterCreator.Services.Services.CharacterServices
     public class CharacterService : ICharacterService
     {
         private readonly AppDbContext _context;
+
+        public CharacterService(AppDbContext context)
+        {
+            _context = context;
+        }
         public async Task<bool> CharacterCreateAsync(CharacterCreate model)
         {
             if (model != null)
@@ -121,5 +126,4 @@ namespace CharacterCreator.Services.Services.CharacterServices
             Console.ResetColor();
         }
     }
-    
 }
