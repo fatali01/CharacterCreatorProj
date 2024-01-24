@@ -33,6 +33,7 @@ namespace CharacterCreatorAPI.Controllers
 
             return BadRequest(new TextResponse("Character could not be registered"));
         }
+        [HttpDelete("Delete")]
         public async Task<IActionResult> CharacterDeleteAsync(int id)
         {
             if(!ModelState.IsValid)
@@ -50,6 +51,7 @@ namespace CharacterCreatorAPI.Controllers
 
             return BadRequest(new TextResponse("Character could not be Deleted"));
         }
+        [HttpGet("List")]
         public async Task<IActionResult> CharacterDetailAsync(int id)
         {
             var CharacterList = await _Context.CharacterDetailAsync(id);
@@ -60,6 +62,7 @@ namespace CharacterCreatorAPI.Controllers
             }
                 return Ok(CharacterList);
         }
+        [HttpPut("Update")]
         public async Task<IActionResult> CharacterUpdateAsync(int id, CharacterCreate model)
         {
             if(!ModelState.IsValid)
