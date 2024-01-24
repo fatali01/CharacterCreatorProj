@@ -15,6 +15,6 @@ namespace CharacterCreator.Models.Models.CharacterModels
         public string? WarriorType { get; set; }
         public string? BirthLocation { get; set; }
         public List<FeatureEntity> Features = new List<FeatureEntity>();
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
     }
 }

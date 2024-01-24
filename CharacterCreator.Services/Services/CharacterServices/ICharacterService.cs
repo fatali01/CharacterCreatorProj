@@ -10,7 +10,9 @@ namespace CharacterCreator.Services.Services.CharacterServices
     public interface ICharacterService
     {
         Task<bool> CharacterCreateAsync(CharacterCreate model);
-
         Task<CharacterDetail> CharacterDetailAsync(int id);
+        Task<bool> CharacterDeleteAsync(int id);
+        Task<bool> CharacterUpdateAsync(int id, CharacterCreate character);
+
     }
 }
