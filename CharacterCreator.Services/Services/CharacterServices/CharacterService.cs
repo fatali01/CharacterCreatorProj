@@ -71,8 +71,6 @@ namespace CharacterCreator.Services.Services.CharacterServices
                         CharacterAge = character.CharacterAge,
                         WarriorType = character.WarriorType,
                         BirthLocation = character.BirthLocation,
-                        Features = character.Features,
-                        TeamId = character.TeamId
                     };
                     System.Console.WriteLine(detail);
                     return detail;
