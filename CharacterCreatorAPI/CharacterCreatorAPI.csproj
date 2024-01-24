@@ -18,8 +18,23 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
     <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+=======
+    <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
+>>>>>>> 0462d8dabe9a0905cbf6c91354cb91db274b5645
+=======
+    <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+>>>>>>> 012db6f6a3ec2f8b706d9f6b678649151003c1e6
+=======
+    <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+>>>>>>> 4e4576785bbb2d80c02d4878e52bfe7384b409bf
     <ProjectReference Include="..\CharacterCreator.Data\CharacterCreator.Data.csproj" />
   </ItemGroup>
 
