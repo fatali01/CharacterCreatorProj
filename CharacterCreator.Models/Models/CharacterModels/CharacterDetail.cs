@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CharacterCreator.Data.Entities;
+using CharacterCreator.Models.Models.FeatureModels;
 
 namespace CharacterCreator.Models.Models.CharacterModels
 {
@@ -14,7 +15,6 @@ namespace CharacterCreator.Models.Models.CharacterModels
         public int CharacterAge { get; set; }
         public string? WarriorType { get; set; }
         public string? BirthLocation { get; set; }
-        public List<FeatureEntity> Features = new List<FeatureEntity>();
-        public int TeamId { get; set; }
+
     }
 }
