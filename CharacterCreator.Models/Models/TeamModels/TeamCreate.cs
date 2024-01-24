@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CharacterCreator.Data.Entities;
+using CharacterCreator.Models.Models.CharacterModels;
 
 namespace CharacterCreator.Models.Models.TeamModels
 {
@@ -15,6 +16,6 @@ namespace CharacterCreator.Models.Models.TeamModels
         public string TeamSlogan { get; set; }= string.Empty;
         public string TeamDescription { get; set; }= string.Empty;
         public string TeamMission { get; set; }= string.Empty;
-        public List<CharacterEntity> Members = new List<CharacterEntity>();
+        public List<CharacterCreate> Members = new List<CharacterCreate>();
     }
 }

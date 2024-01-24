@@ -46,7 +46,7 @@ namespace CharacterCreator.Services.Services.CharacterServices
                     CharacterAge = character.CharacterAge,
                     WarriorType = character.WarriorType,
                     BirthLocation = character.BirthLocation,
-                    Features = character.Features,
+                    // Features = character.Features,
                     TeamId = character.TeamId
                 };
 
