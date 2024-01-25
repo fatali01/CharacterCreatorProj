@@ -12,6 +12,7 @@ namespace CharacterCreator.Services.Services.FeatureServices
     public class FeatureService : IFeatureService
     {
         private readonly AppDbContext _context;
+        public FeatureService(AppDbContext context){_context = context;}
         public async Task<FeaturesDetail> FeatureDetailByIdAsync(int featureId)
         {
             FeatureEntity feature = await _context.Features.FindAsync(featureId);
@@ -48,7 +49,8 @@ namespace CharacterCreator.Services.Services.FeatureServices
                     Weight = model.Weight.ToString(),
                     BodyType = model.BodyType,
                     Ability = model.Ability,
-                    SkinColor = model.SkinColor
+                    SkinColor = model.SkinColor,
+                    CharacterId = model.CharacterId
                 };
                 await _context.Features.AddAsync(features);
                 await _context.SaveChangesAsync();
