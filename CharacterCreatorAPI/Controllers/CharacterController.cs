@@ -15,6 +15,11 @@ namespace CharacterCreatorAPI.Controllers
     {
         private readonly ICharacterService _Context;
 
+        public CharacterController(ICharacterService context)
+        {
+            _Context = context;
+        }
+
         [HttpPost("Create")]
         public async Task<IActionResult> CharacterCreateAsync([FromBody] CharacterCreate model)
         {
@@ -51,7 +56,7 @@ namespace CharacterCreatorAPI.Controllers
 
             return BadRequest(new TextResponse("Character could not be Deleted"));
         }
-        [HttpGet("List")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> CharacterDetailAsync(int id)
         {
             var CharacterList = await _Context.CharacterDetailAsync(id);
