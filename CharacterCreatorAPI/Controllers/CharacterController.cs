@@ -15,6 +15,12 @@ namespace CharacterCreatorAPI.Controllers
     {
         private readonly ICharacterService _Context;
 
+        public CharacterController(ICharacterService context)
+        {
+            _Context = context;
+        }
+
+        [HttpPost("Create")]
         public async Task<IActionResult> CharacterCreateAsync([FromBody] CharacterCreate model)
         {
             if(!ModelState.IsValid)
@@ -26,11 +32,58 @@ namespace CharacterCreatorAPI.Controllers
 
             if (charactercreate)
             {
-                TextResponse response = new("User was registered");
+                TextResponse response = new("Character was registered");
                 return Ok(response);
             }
 
-            return BadRequest(new TextResponse("User could not be registered"));
+            return BadRequest(new TextResponse("Character could not be registered"));
+        }
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> CharacterDeleteAsync(int id)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            var CharacterDelete = await _Context.CharacterDeleteAsync(id);
+
+            if (CharacterDelete)
+            {
+                TextResponse response = new("Character was Deleted");
+                return Ok(response);
+            }
+
+            return BadRequest(new TextResponse("Character could not be Deleted"));
+        }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> CharacterDetailAsync(int id)
+        {
+            var CharacterList = await _Context.CharacterDetailAsync(id);
+
+            if (CharacterList is null)
+            {
+                return NotFound();
+            }
+                return Ok(CharacterList);
+        }
+        [HttpPut("Update")]
+        public async Task<IActionResult> CharacterUpdateAsync(int id, CharacterCreate model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var characterUpdate = await _Context.CharacterUpdateAsync(id, model);
+
+            if (characterUpdate)
+            {
+                TextResponse response = new($"Character with the ID of {id} was Updated to: {model.CharacterName}\n {model.CharacterAge}\n {model.WarriorType}\n {model.BirthLocation}\n {model.CharacterDescription}\n");
+                return Ok(response);
+            }
+
+            return BadRequest(new TextResponse("Character could not be Updated"));
         }
     }
 }
