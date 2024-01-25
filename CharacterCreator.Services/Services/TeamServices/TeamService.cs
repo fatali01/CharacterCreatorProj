@@ -13,7 +13,10 @@ namespace CharacterCreator.Services.Services.TeamServices
     public class TeamService : ITeamService
     {
         private readonly AppDbContext _context;
-
+        public TeamService(AppDbContext context)
+        {
+            _context = context;
+        }
         public async Task<bool> TeamCreateAsync(TeamCreate model)
         {
             if (model == null) return false;
