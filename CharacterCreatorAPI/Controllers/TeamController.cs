@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CharacterCreator.Models.Models.TeamModels;
+using CharacterCreator.Models.Responses;
+using CharacterCreator.Services.Services.TeamServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CharacterCreatorAPI.Controllers
@@ -10,23 +13,51 @@ namespace CharacterCreatorAPI.Controllers
     [Route("api/[controller]")]
     public class TeamController : ControllerBase
     {
-        private readonly ITeamService _context;
-
-        public async Task<IActionResult> CharacterCreateAsync([FromBody] CharacterCreate model)
+        private readonly ITeamService _teamService;
+        public TeamController(ITeamService teamService)
+        {
+            _teamService = teamService;
+        }
+        [HttpPost]
+        public async Task<IActionResult> TeamCreateAsync([FromBody] TeamCreate model)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var charactercreate = await _Context.CharacterCreateAsync(model);
+            var teamcreate = await _teamService.TeamCreateAsync(model);
 
-            if (charactercreate)
+            if (teamcreate)
             {
-                TextResponse response = new("User was registered");
-                return Ok(response);
+                return Ok(teamcreate);
             }
 
             return BadRequest(new TextResponse("User could not be registered"));
-    }
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> TeamMemberDelete([FromBody]int id)
+        {
+            return await _teamService.TeamMemberDelete(id)
+            ? Ok ($"Id {id} was deleted from his team.")
+            : BadRequest($"Id {id} could not be deleted");
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> TeamDelete([FromBody]int id)
+        {
+            return await _teamService.TeamDelete(id)
+            ? Ok ($"Team Id {id} was deleted")
+            : BadRequest($"Id {id} could not be deleted");
+        }
+        [HttpGet("{model:TeamList}")]
+        public async Task<IActionResult> TeamListMemberIds(TeamList model)
+        {
+            TeamList? teamlist = await _teamService.TeamListMemberIds(model);
+
+
+            return teamlist is not null
+                ? Ok(teamlist)
+                : NotFound();
+        }
+}
 }
