@@ -10,6 +10,10 @@ namespace CharacterCreator.Services.Services.TeamServices
     {
         Task<bool> TeamCreateAsync(TeamCreate model);
 
-        Task<TeamList> TeamListAsync(int teamId);
+        Task<TeamList> TeamListMemberIds(TeamList model);
+
+        Task<bool> TeamMemberDelete(int id);
+
+        Task<bool> TeamDelete(int id);
     }
 }

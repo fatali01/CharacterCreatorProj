@@ -20,5 +20,7 @@ namespace CharacterCreator.Models.Models.CharacterModels
         public string? WarriorType { get; set; }
         [Required, MaxLength(100), MinLength(1)]
         public string? BirthLocation { get; set; }
+        public List<FeatureEntity> Features = new List<FeatureEntity>();
+
     }
 }

@@ -16,8 +16,8 @@ namespace CharacterCreator.Data.Entities
         public string TeamSlogan { get; set; }= string.Empty;
         public string TeamDescription { get; set; }= string.Empty;
         public string TeamMission { get; set; }= string.Empty;
-        [ForeignKey(nameof(CharacterId))]
-        public int CharacterId { get; set; }
+        // [ForeignKey(nameof(CharacterId))]
+        // public int CharacterId { get; set; }
         public List<CharacterEntity> Members = new List<CharacterEntity>();
     }
 }
