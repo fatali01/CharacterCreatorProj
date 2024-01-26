@@ -23,10 +23,6 @@ namespace CharacterCreator.Data.Entities
         public string BirthLocation { get; set; } = string.Empty;
         public List<FeatureEntity> Features  = new List<FeatureEntity>();
         [ForeignKey(nameof(TeamId))]
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
         public int? TeamId { get; set; }
     }
 }
