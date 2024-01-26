@@ -41,11 +41,6 @@ namespace CharacterCreatorAPI.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> CharacterDeleteAsync(int id)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            
             var CharacterDelete = await _Context.CharacterDeleteAsync(id);
 
             if (CharacterDelete)
