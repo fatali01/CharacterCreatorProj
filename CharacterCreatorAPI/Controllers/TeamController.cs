@@ -49,11 +49,10 @@ namespace CharacterCreatorAPI.Controllers
             ? Ok ($"Team Id {id} was deleted")
             : BadRequest($"Id {id} could not be deleted");
         }
-        [HttpGet("{model:TeamList}")]
-        public async Task<IActionResult> TeamListMemberIds(TeamList model)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetTeamMembers(int id)
         {
-            TeamList? teamlist = await _teamService.TeamListMemberIds(model);
-
+            TeamList teamlist = await _teamService.GetTeamMembers(id);
 
             return teamlist is not null
                 ? Ok(teamlist)
