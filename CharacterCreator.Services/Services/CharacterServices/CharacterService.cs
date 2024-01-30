@@ -62,6 +62,24 @@ namespace CharacterCreator.Services.Services.CharacterServices
                 return false;
             }
         }
+
+        public async Task<bool> CharacterDetailAllAsync()
+        {
+            try
+            {
+                foreach(var character in _context.Characters)
+                {
+                    System.Console.WriteLine(character);
+                }
+                return true;
+            }
+            catch(Exception ex)
+            {
+                DisplayError(ex.Message);
+                return false;
+            }
+        }
+
         public async Task<CharacterDetail> CharacterDetailAsync(int id)
         {
             try

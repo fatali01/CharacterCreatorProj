@@ -51,7 +51,7 @@ namespace CharacterCreatorAPI.Controllers
 
             return BadRequest(new TextResponse("Character could not be Deleted"));
         }
-        [HttpGet("{id:int}")]
+        [HttpGet("Get/{id:int}")]
         public async Task<IActionResult> CharacterDetailAsync(int id)
         {
             var CharacterList = await _Context.CharacterDetailAsync(id);
@@ -61,6 +61,17 @@ namespace CharacterCreatorAPI.Controllers
                 return NotFound();
             }
                 return Ok(CharacterList);
+        }
+        [HttpGet("GetAllCharacters")]
+        public async Task<IActionResult> CharacterDetailAllAsync()
+        {
+            var allCharacterList = _Context.CharacterDetailAllAsync();
+
+            if (allCharacterList is null)
+            {
+                return NotFound();
+            }
+                return Ok(allCharacterList);
         }
         [HttpPut("Update")]
         public async Task<IActionResult> CharacterUpdateAsync(int id, CharacterCreate model)

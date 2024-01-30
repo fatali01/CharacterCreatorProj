@@ -35,7 +35,8 @@ namespace CharacterCreatorAPI.Controllers
 
             return BadRequest(new TextResponse("User could not be registered"));
         }
-        [HttpDelete("{id:int}")]
+        [HttpDelete]
+        [Route("TeamMemberDelete/{id:int}")]
         public async Task<IActionResult> TeamMemberDelete([FromBody]int id)
         {
             return await _teamService.TeamMemberDelete(id)

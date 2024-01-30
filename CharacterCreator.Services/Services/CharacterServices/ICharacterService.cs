@@ -13,6 +13,7 @@ namespace CharacterCreator.Services.Services.CharacterServices
         Task<CharacterDetail> CharacterDetailAsync(int id);
         Task<bool> CharacterDeleteAsync(int id);
         Task<bool> CharacterUpdateAsync(int id, CharacterCreate character);
+        Task<bool> CharacterDetailAllAsync();
 
     }
 }
