@@ -6,6 +6,7 @@ using CharacterCreator.Data;
 using CharacterCreator.Data.Entities;
 using CharacterCreator.Models.Models.CharacterModels;
 using CharacterCreator.Models.Models.FeatureModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace CharacterCreator.Services.Services.CharacterServices
 {
@@ -63,22 +64,37 @@ namespace CharacterCreator.Services.Services.CharacterServices
             }
         }
 
-        public async Task<bool> CharacterDetailAllAsync()
-        {
-            try
-            {
-                foreach(var character in _context.Characters)
-                {
-                    System.Console.WriteLine(character);
-                }
-                return true;
-            }
-            catch(Exception ex)
-            {
-                DisplayError(ex.Message);
-                return false;
-            }
-        }
+        // public async Task<List<CharacterDetail>> CharacterDetailAllAsync()
+        // {
+        //     try
+        //     {
+        //         List<CharacterDetail> characters = await _context.Characters
+        //         //  project each CharacterEntity into a CharacterDetail
+        //             .Select(character => new CharacterDetail
+        //             {
+        //                 CharacterName = character.CharacterName,
+        //                 CharacterDescription = character.CharacterDescription,
+        //                 CharacterAge = character.CharacterAge,
+        //                 WarriorType = character.WarriorType,
+        //                 BirthLocation = character.BirthLocation,
+        //             })
+        //             // asynchronously retrieve the list of CharacterDetail
+        //             .ToListAsync();
+
+        //         // Print or use the characters list as needed
+        //         foreach (var character in characters)
+        //         {
+        //             System.Console.WriteLine(character);
+        //         }
+
+        //         return characters;
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         DisplayError(ex.Message);
+        //         return new List<CharacterDetail>();
+        //     }
+        // }
 
         public async Task<CharacterDetail> CharacterDetailAsync(int id)
         {
@@ -134,6 +150,38 @@ namespace CharacterCreator.Services.Services.CharacterServices
                 return false;
             }
         }
+
+        async Task<List<CharacterDetail>> ICharacterService.CharacterDetailAllAsync()
+        {
+            try
+            {
+                //  project each CharacterEntity into a CharacterDetail
+                List<CharacterDetail> characters = await _context.Characters.Select(character => new CharacterDetail
+                    {
+                        CharacterName = character.CharacterName,
+                        CharacterDescription = character.CharacterDescription,
+                        CharacterAge = character.CharacterAge,
+                        WarriorType = character.WarriorType,
+                        BirthLocation = character.BirthLocation,
+                    })
+                    // asynchronously retrieve the list of CharacterDetail
+                    .ToListAsync();
+
+                // Print or use the characters list as needed
+                foreach (var character in characters)
+                {
+                    System.Console.WriteLine(character);
+                }
+
+                return characters;
+            }
+            catch (Exception ex)
+            {
+                DisplayError(ex.Message);
+                return new List<CharacterDetail>();
+            }
+        }
+
         //Helper Methods
         void DisplayError(string v)
         {

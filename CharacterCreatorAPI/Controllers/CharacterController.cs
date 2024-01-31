@@ -65,7 +65,7 @@ namespace CharacterCreatorAPI.Controllers
         [HttpGet("GetAllCharacters")]
         public async Task<IActionResult> CharacterDetailAllAsync()
         {
-            var allCharacterList = _Context.CharacterDetailAllAsync();
+            var allCharacterList = await _Context.CharacterDetailAllAsync();
 
             if (allCharacterList is null)
             {
