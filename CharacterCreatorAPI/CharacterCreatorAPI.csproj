@@ -7,8 +7,7 @@
     <UserSecretsId>0d950b5b-2d12-4430-bf6d-ba0b232b9975</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
+  <ItemGroup>  
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -16,7 +15,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+
+    <ProjectReference Include="..\CharacterCreator.Models\CharacterCreator.Models.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Services\CharacterCreator.Services.csproj" />
+    <ProjectReference Include="..\CharacterCreator.Data\CharacterCreator.Data.csproj" />
   </ItemGroup>
 
 
