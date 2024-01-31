@@ -10,10 +10,12 @@ namespace CharacterCreator.Services.Services.FeatureServices
     {
         Task<bool> FeaturesCreateAsync(FeaturesCreate model);
 
+        Task<bool> GetAllFeaturesDetail();
         Task<FeaturesDetail> FeatureDetailByIdAsync(int featureId);
 
         Task<bool> DeleteFeatureByIdAsync(int featureId);
 
         Task<bool> UpdateFeatureByIdAsync(int featureId, FeaturesCreate featureCreated);
+
     }
 }
