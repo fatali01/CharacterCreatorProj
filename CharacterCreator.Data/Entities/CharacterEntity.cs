@@ -22,7 +22,8 @@ namespace CharacterCreator.Data.Entities
         [Required, MaxLength(100), MinLength(1)]
         public string BirthLocation { get; set; } = string.Empty;
         public List<FeatureEntity> Features  = new List<FeatureEntity>();
-        [ForeignKey(nameof(TeamId))]
         public int? TeamId { get; set; }
+        [ForeignKey(nameof(TeamId))]
+        public TeamEntity TeamEntity { get; set; }
     }
 }

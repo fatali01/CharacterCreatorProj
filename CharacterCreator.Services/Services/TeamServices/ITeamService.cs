@@ -15,5 +15,7 @@ namespace CharacterCreator.Services.Services.TeamServices
         Task<bool> TeamDelete(int id);
 
         Task<TeamList> GetTeamMembers(int id);
+
+        Task<bool> TeamMemberAdd(int id, int teamid);
     }
 }
