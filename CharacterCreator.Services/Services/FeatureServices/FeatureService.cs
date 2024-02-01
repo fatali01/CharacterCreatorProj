@@ -5,19 +5,21 @@ using System.Threading.Tasks;
 using CharacterCreator.Data;
 using CharacterCreator.Data.Entities;
 using CharacterCreator.Models.Models.FeatureModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualBasic;
 
 namespace CharacterCreator.Services.Services.FeatureServices
 {
     public class FeatureService : IFeatureService
     {
         private readonly AppDbContext _context;
-        public FeatureService(AppDbContext context){_context = context;}
+        public FeatureService(AppDbContext context) { _context = context; }
         public async Task<FeaturesDetail> FeatureDetailByIdAsync(int featureId)
         {
             FeatureEntity feature = await _context.Features.FindAsync(featureId);
 
-            if(feature != null)
+            if (feature != null)
             {
                 FeaturesDetail characterFeatureDetail = new()
                 {
@@ -31,10 +33,25 @@ namespace CharacterCreator.Services.Services.FeatureServices
                     SkinColor = feature.SkinColor
                 };
                 System.Console.WriteLine(characterFeatureDetail);
-                return characterFeatureDetail; 
+                return characterFeatureDetail;
             }
             return null;
         }
+
+        public async Task<List<FeaturesListModel>> GetAllFeaturesDetail()
+        {
+            var features = await _context.Features.Select(features => new FeaturesListModel{
+                FeatureId = features.FeatureId,
+            BodyType = features.BodyType,
+            Ability = features.Ability,
+            SkinColor = features.SkinColor,
+            CharacterId = features.CharacterId
+            }).ToListAsync();
+
+            return features;
+
+        }
+
 
         public async Task<bool> FeaturesCreateAsync(FeaturesCreate model)
         {
@@ -63,7 +80,7 @@ namespace CharacterCreator.Services.Services.FeatureServices
         {
             FeatureEntity feature = await _context.Features.FindAsync(featureId);
 
-            if(featureId != null)
+            if (featureId != null)
             {
                 _context.Features.Remove(feature);
 
@@ -77,7 +94,7 @@ namespace CharacterCreator.Services.Services.FeatureServices
         {
             FeatureEntity feature = await _context.Features.FindAsync(featureId);
 
-            if(featureId != null)
+            if (featureId != null)
             {
                 feature.EyeColor = featureCreated.EyeColor;
                 feature.HairStyle = featureCreated.HairStyle;
@@ -88,9 +105,10 @@ namespace CharacterCreator.Services.Services.FeatureServices
                 feature.Ability = featureCreated.Ability;
                 feature.SkinColor = featureCreated.SkinColor;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             return true;
         }
+
     }
 }
