@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using CharacterCreator.Data;
 using CharacterCreator.Data.Entities;
+using CharacterCreator.Models.Models.CharacterModels;
 using CharacterCreator.Models.Models.TeamModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +19,7 @@ namespace CharacterCreator.Services.Services.TeamServices
         {
             _context = context;
         }
-        public async Task<bool> TeamCreateAsync(TeamCreate model)
+        public async Task<bool> TeamCreateAsync(TeamCreate model) 
         {
         try{
             if (model == null) return false;
@@ -28,26 +30,11 @@ namespace CharacterCreator.Services.Services.TeamServices
                 TeamNumber = model.TeamNumber,
                 TeamSlogan = model.TeamSlogan,
                 TeamDescription = model.TeamDescription,
-                TeamMission = model.TeamMission,
-                // Members = model.C
+                TeamMission = model.TeamMission,  
             };
             await _context.Teams.AddAsync(team);
             await _context.SaveChangesAsync();
-            foreach (var id in model.MemberIds)
-            {
-                // team.Members.Add(member);
-                var character = await _context.Characters.FindAsync(id);
-                if (character != null)
-                {
-                    if(character.TeamId == null)
-                    {
-                    character.TeamId = team.TeamId;
-                    }
-                }
 
-            }
-            await _context.AddAsync(team);
-            await _context.SaveChangesAsync();
             return true;
         }
         catch (Exception ex)
@@ -94,7 +81,7 @@ namespace CharacterCreator.Services.Services.TeamServices
             if (team != null)
             {
                 _context.Teams.Remove(team);
-                
+                await _context.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -105,38 +92,67 @@ namespace CharacterCreator.Services.Services.TeamServices
         return false;
     }
         }
-        public async Task<TeamList> GetTeamMembers(int id)
+        public async Task<TeamList> GetTeamMembers(int teamid) 
         {
         try
-        {
-            TeamEntity team = await _context.Teams.FindAsync(id);
-            if (team == null)
+        {    
+            var members = await _context.Characters.Where(x => x.TeamId == teamid).ToListAsync();
+            var team = await _context.Teams.FindAsync(teamid);
+            if (members == null)
             {
-                return null; 
+                return null;
             }
-
-            var teamList = new TeamList
+            TeamList teamlist = new TeamList    
             {
                 TeamName = team.TeamName,
                 TeamNumber = team.TeamNumber,
                 TeamSlogan = team.TeamSlogan,
                 TeamDescription = team.TeamDescription,
                 TeamMission = team.TeamMission,
-                MemberIds = team.Members.Select(member => member.CharacterId).ToList()
-            };
-
-            return teamList;
+                TeamMembers = members.Select(member => new CharacterListItem{
+                    Id = member.CharacterId,
+                    WarriorType = member.WarriorType,
+                    CharacterName = member.CharacterName 
+                    }).ToList(),
+                MemberIds = members.Select(member => member.CharacterId).ToList()
+                };
+            return teamlist;
+            
         }
+        
         catch (Exception ex)
-    {
+        {
         DisplayError(ex.Message);
         return null;
-    }
+        }
+        }
+        public async Task<bool> TeamMemberAdd(int id, int teamid)
+        {        
+        try
+        {
+            var character = await _context.Characters.FindAsync(id);
+
+            if (character != null)
+            {
+                character.TeamId = teamid;
+                await _context.SaveChangesAsync();                
+                return true;
+            }
+            else
+                return false;
+
+        }
+        catch (Exception ex)
+        {
+            DisplayError(ex.Message);
+            return false;
+        }
         }
 
-        private void DisplayError(string message)
-        {
-            throw new NotImplementedException();
-        }
+    private void DisplayError(string message)
+    {
+        Console.WriteLine($"Error: {message}");
+        // Alternatively, use a logging framework to log the error
+    }
     }
 }

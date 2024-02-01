@@ -13,7 +13,8 @@ namespace CharacterCreator.Models.Models.TeamModels
         public int TeamNumber { get; set; }
         public string TeamSlogan { get; set; }= string.Empty;
         public string TeamDescription { get; set; }= string.Empty;
-        public string TeamMission { get; set; }= string.Empty;     
-        public List<int> MemberIds { get; set; } = new List<int>();
+        public string TeamMission { get; set; }= string.Empty;
+        public List<int> MemberIds { get; set; } = new List<int>();     
+        public List<CharacterListItem> TeamMembers { get; set; } = new List<CharacterListItem>();
     }
 }
