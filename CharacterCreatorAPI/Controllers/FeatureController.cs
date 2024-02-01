@@ -34,11 +34,10 @@ namespace CharacterCreatorAPI.Controllers
                 return Ok(response);
             }
             
-        
             return BadRequest(new TextResponse("Feature could not be created"));
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("/Delete/{featureId:int}")]
         public async Task<IActionResult> DeleteFeatureByIdAsync(int featureId)
         {
             if(!ModelState.IsValid)
@@ -56,7 +55,7 @@ namespace CharacterCreatorAPI.Controllers
             return BadRequest(new TextResponse("Could not delete features"));
         }
 
-        [HttpPut("Update")]
+        [HttpPut("/Update/{featureId:int}")]
         public async Task<IActionResult>UpdateFeatureByIdAsync(int featureId, FeaturesCreate model)
         {
             if(!ModelState.IsValid)
@@ -72,19 +71,24 @@ namespace CharacterCreatorAPI.Controllers
                 return Ok(response);
             }
             return BadRequest(new TextResponse("The feature Id you have selected has NOT updated successfully."));
-
         }
         
-        [HttpGet("{featureId:int}")]
+        [HttpGet("/OneById/{featureId:int}")]
         public async Task<IActionResult> GetFeatureById(int featureId)
         {
             var FeaturesList = await _featureService.FeatureDetailByIdAsync(featureId);
 
-            if(FeaturesList != null)
+            if(FeaturesList is null)
             {
                 return NotFound();
             }
             return Ok(FeaturesList);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllFeatures()
+        {
+            var FeatureList = await _featureService.GetAllFeaturesDetail();
+            return Ok(FeatureList);
         }
         
     }

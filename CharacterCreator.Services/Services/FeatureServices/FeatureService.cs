@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CharacterCreator.Data;
 using CharacterCreator.Data.Entities;
 using CharacterCreator.Models.Models.FeatureModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.VisualBasic;
 
@@ -37,14 +38,19 @@ namespace CharacterCreator.Services.Services.FeatureServices
             return null;
         }
 
-        public async Task<bool> GetAllFeaturesDetail()
+        public async Task<List<FeaturesListModel>> GetAllFeaturesDetail()
         {
-                foreach (var feature in _context.Features)
-                {
-                    System.Console.WriteLine(feature);
-                }
-                return false;
-            }
+            var features = await _context.Features.Select(features => new FeaturesListModel{
+                FeatureId = features.FeatureId,
+            BodyType = features.BodyType,
+            Ability = features.Ability,
+            SkinColor = features.SkinColor,
+            CharacterId = features.CharacterId
+            }).ToListAsync();
+
+            return features;
+
+        }
 
 
         public async Task<bool> FeaturesCreateAsync(FeaturesCreate model)

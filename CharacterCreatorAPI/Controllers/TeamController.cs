@@ -42,14 +42,14 @@ namespace CharacterCreatorAPI.Controllers
             ? Ok ($"Id {id} was deleted from his team.")
             : BadRequest($"Id {id} could not be deleted");
         }
-        [HttpDelete("{id:int}")]
+        [HttpDelete("/TeamMemberDelete/{id:int}")]
         public async Task<IActionResult> TeamDelete([FromBody]int id)
         {
             return await _teamService.TeamDelete(id)
             ? Ok ($"Team Id {id} was deleted")
             : BadRequest($"Id {id} could not be deleted");
         }
-        [HttpGet("{id:int}")]
+        [HttpGet("/TeamMembers/{id:int}")]
         public async Task<IActionResult> GetTeamMembers(int id)
         {
             TeamList teamlist = await _teamService.GetTeamMembers(id);
